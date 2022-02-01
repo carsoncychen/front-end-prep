@@ -1,0 +1,27 @@
+.board {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.cell {
+  border: 1px solid pink;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+}
+
+body {
+  background-color: lightblue;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+input[type="text"]
+{
+    font-size:50px;
+    text-align: center;
+}

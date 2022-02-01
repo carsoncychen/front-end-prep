@@ -1,0 +1,132 @@
+<!-- Tic Tac Toe using html, javascript and css -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>
+    Tic Tac Toe
+  </h1>
+
+  <div class="board">
+    <input id="0-0" class="cell" type="text" readonly />
+    <input id="0-1" class="cell" type="text" readonly />
+    <input id="0-2" class="cell" type="text" readonly />
+    <input id="1-0" class="cell" type="text" readonly />
+    <input id="1-1" class="cell" type="text" readonly />
+    <input id="1-2" class="cell" type="text" readonly />
+    <input id="2-0" class="cell" type="text" readonly />
+    <input id="2-1" class="cell" type="text" readonly />
+    <input id="2-2" class="cell" type="text" readonly />
+  </div>
+
+<script>
+  let isX = true;
+  let moveCounts = 0;
+  const sizeOfBoard = 3;
+  const rowCountsForX = new Array(sizeOfBoard).fill(0)
+  const columnCountsForX = new Array(sizeOfBoard).fill(0)
+  const diaCountsForX = new Array(sizeOfBoard).fill(0)
+  const antiDiaCountsForX = new Array(sizeOfBoard).fill(0)
+  const rowCountsForO = new Array(sizeOfBoard).fill(0)
+  const columnCountsForO = new Array(sizeOfBoard).fill(0)
+  const diaCountsForO = new Array(sizeOfBoard).fill(0)
+  const antiDiaCountsForO = new Array(sizeOfBoard).fill(0)
+
+  function recordInput(curPlayer, rowIndex, columnIndex) {
+
+      if (curPlayer === 'X') {
+        rowCountsForX[rowIndex] = rowCountsForX[rowIndex] + 1;
+        columnCountsForX[columnIndex] = columnCountsForX[columnIndex] + 1;
+
+        if (rowIndex === columnIndex) {
+          diaCountsForX[rowIndex] = 1;
+        }
+
+        if ((parseInt(rowIndex) + parseInt(columnIndex) + 1) === sizeOfBoard) {
+          antiDiaCountsForX[columnIndex] = 1;
+        }
+      } else {
+        rowCountsForO[rowIndex] = rowCountsForO[rowIndex] + 1;
+        columnCountsForO[columnIndex] = columnCountsForO[columnIndex] + 1;
+
+        if (rowIndex === columnIndex) {
+          diaCountsForO[rowIndex] = 1;
+        }
+
+        if ((parseInt(rowIndex) + parseInt(columnIndex) + 1) === sizeOfBoard) {
+          antiDiaCountsForO[columnIndex] = 1;
+        }
+      }
+    }
+
+  function checkForWinner(curPlayer, rowIndex, columnIndex) {
+    let foundWinner = false;
+
+    if (curPlayer === 'X') {
+      if (rowCountsForX[rowIndex] === sizeOfBoard || columnCountsForX[columnIndex] === sizeOfBoard) {
+        foundWinner = true;
+      }
+
+      if (diaCountsForX.reduce((prev, cur) => prev + cur, 0) === sizeOfBoard || antiDiaCountsForX.reduce((prev, cur) => prev + cur, 0) === sizeOfBoard) {
+        foundWinner = true;
+      }
+
+      if (foundWinner) {
+        const newEle = document.createElement('div')
+        newEle.innerText = 'X is Winner!'
+        document.querySelector('body').append(newEle)
+      }
+    } else {
+      if (rowCountsForO[rowIndex] === sizeOfBoard || columnCountsForO[columnIndex] === sizeOfBoard) {
+        foundWinner = true;
+      }
+
+      if (diaCountsForO.reduce((prev, cur) => prev + cur, 0) === sizeOfBoard || antiDiaCountsForO.reduce((prev, cur) => prev + cur, 0) === sizeOfBoard) {
+        foundWinner = true;
+      }
+
+      if (foundWinner) {
+        const newEle = document.createElement('div')
+        newEle.innerText = 'O is Winner!'
+        document.querySelector('body').append(newEle)
+      }
+    }
+
+    if (moveCounts === (sizeOfBoard * sizeOfBoard) && !foundWinner) {
+      const newEle = document.createElement('div')
+      newEle.innerText = 'Draw!'
+      document.querySelector('body').append(newEle)
+    }
+  }
+
+  function inputSignOnClick (e) {
+    if (e.target.value) return;
+
+    let curPlayer = isX ? 'X' : 'O';
+
+    e.target.value = curPlayer;
+    moveCounts++;
+    isX = !isX;
+
+    const [rowIndex, columnIndex] = e.target.id.split('-')
+
+    recordInput(curPlayer, rowIndex, columnIndex);
+    checkForWinner(curPlayer, rowIndex, columnIndex);
+  }
+
+  const cells = document.querySelectorAll(".cell")
+
+  cells.forEach(cell => {
+    cell.addEventListener("click", inputSignOnClick)
+  })
+
+</script>
+</body>
+
+</html>

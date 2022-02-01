@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>My First Heading</h1>
+  <p>My first paragraph.</p>
+
+</body>
+<script>
+
+  const h1 = document.querySelector('h1')
+  const p = document.querySelector('p')
+
+  h1.innerText = 'Practice Promise'
+  p.innerText = 'Async and Await is better'
+
+  function makeRequest(location) {
+    return new Promise((resolve, reject) => {
+      console.log(`Making Request to ${location}`)
+      if (location === 'Google') {
+        resolve('Google rocks!')
+      } else {
+        reject(`${location} sucks!`)
+      }
+    })
+  }
+
+  function processResponse(response) {
+    return new Promise((resolve, reject) => {
+      console.log('Processing response')
+      resolve(`Extra information + ${response}`)
+    })
+  }
+
+  // makeRequest('Google').then(response => {
+  //   console.log('Response received')
+  //   return processResponse(response)
+  // }).then(res => {console.log(res)}).catch(err => console.log(err))
+
+  const doWork = async () => {
+    try {
+      const response = await makeRequest('Meta');
+
+      console.log('Response received')
+
+      const processedResponse = await processResponse(response);
+
+      console.log(processedResponse)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  doWork();
+</script>
+
+</html>
