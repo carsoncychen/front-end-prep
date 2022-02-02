@@ -1,16 +1,17 @@
 Coding practice
 
-- [ ] Promisify a function
-- [ ] Implement search bar
+- [X] Promisify a function
+- [X] Implement search bar
 - [ ] Implement querySelectorAll
 - [ ] Implement banner text
-- [ ] Implement popup modal
+- [X] Implement popup modal
 - [ ] Implement debouncer
 - [ ] Implement pagination
 - [ ] Implement Stack, Queue, Hashmap DS in class
-- [ ] Implement TicTacToe
+- [X] Implement TicTacToe
 - [X] Flatten nested object and array
-- [ ] Write the method for reduce
+- [X] Write the method for reduce
+- [ ] Array methods
 - [ ] Dynamically build a file tree from a nested JSON object
 - [ ] Adaptive layout with flexbox
 - [ ] CSS box, display, position
@@ -26,4 +27,4 @@ Coding practice
 
 
 Leadership Principals
-- [ ] Placeholder
+- [ ] (https://www.levels.fyi/blog/amazon-leadership-principles.html)
